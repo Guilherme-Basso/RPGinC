@@ -35,26 +35,7 @@ int main(void) {
             case 1:guerreiro();break;
             case 2:mago();break;
             case 3:arqueiro();break;
-
-            case 4:
-                system("cls");
-                printf("Bem vindo a Loja:\n");
-                printf("Voce tem %d gold para gastar.\n", gold);
-                printf("Voce gostaria de comprar o que?\n");
-                printf("1- Upgrade de dano 1. Custo 15 gold.\n");
-                scanf("%d", &loja);
-                if (loja == 1 && gold >=15) {
-                    dmgUp += 2;
-                    gold -= 15;
-                    printf("Seu bonus de dano foi aumentado em 2 (total:%d)\n", dmgUp);
-                    printf("Seu gold foi reduzido em 15 (gold total: %d\n", gold);
-                    system("pause");
-                }else {
-                    printf("Gold insuficiente");
-                    system("pause");
-                }
-
-                break;
+            case 4:loja();break;
 
             case 0:
                 printf("\nEncerrando...\n");

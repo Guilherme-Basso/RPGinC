@@ -4,5 +4,6 @@
 void guerreiro();
 void mago();
 void arqueiro();
+void loja();
 
 #endif
