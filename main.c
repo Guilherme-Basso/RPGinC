@@ -55,6 +55,7 @@ int main(void) {
                 printf("2 - Boneco de Gengibre\n");
                 printf("3 - Duende do Natal\n");
                 scanf(" %d", &enemy);
+                system("cls");
                 combate(enemy);
                 break;
 
