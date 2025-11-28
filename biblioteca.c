@@ -1,211 +1,75 @@
-//Cidades
-//3 a 5 monstros
-//Loja com diferentes tiers de upgrades
-//Tema: NATAL
-//Password ultima cidade
 #include <stdio.h>
 #include <stdlib.h>
+#include "biblioteca.h"
 
 int HP_G = 125;
 int HP_M = 65;
 int HP_A = 90;
 int gold = 0;
-
-int dmgUp=0;
-int loja=0;
+int dmgUp = 0;
+int loja = 0;
 int classe;
 int arma;
-int armaDamage;
 int enemy;
 int enemyLife;
 
-//----------------------------- Guerreiro ---------------------------------------------------------------------
-void guerreiro() {
+int rolarDado(int lados) {
+    return (rand() % lados) + 1;
+}
 
-    printf("\nVoce e um Guerreiro, qual arma vai usar?\n");
-    printf("1- Machado de duas maos (D10)\n");
-    printf("2- Martelo de duas maos (D8)\n");
-    printf("3- Espada de duas maos (D12)\n");
-    scanf("%d", &arma);
-
-    printf("\nEscolha seu adversario:\n");
-    printf("1- Rato\n");
-    printf("2- Dragao\n");
-    scanf("%d", &enemy);
-
+void combate(int enemy) {
     if (enemy == 1) {
-        enemyLife = 35;
-        system("cls");
-        while (enemyLife > 0) {
-            printf("\nVoce ataca o rato!\n");
-            if (arma == 1) armaDamage = rand() % 11 + dmgUp;
-            else if (arma == 2) armaDamage = rand() % 9 + dmgUp;
-            else if (arma == 3) armaDamage = rand() % 13 + dmgUp;
-            else armaDamage = 0;
-
-            printf("Seu dano foi de %d\n", armaDamage);
-            enemyLife -= armaDamage;
-            printf("O inimigo agora tem %d de vida\n", enemyLife);
-        }
-        printf("\nParabens!!! Voce derrotou o Rato!\n");
-        gold = gold + rand() % 6;
-        printf("Voce ganhou %d de ouro!\n", gold);
-        printf("Agora voce tem %d gold.", gold);
-        system ("pause");
+        enemyLife = 22;
+        printf("Voce esta enfrentando um Boneco de Neve!\n");
+    } else if (enemy == 2) {
+        enemyLife = 38;
+        printf("Voce esta enfrentando um Boneco de Gengibre!\n");
+    } else if (enemy == 3) {
+        enemyLife = 55;
+        printf("Voce esta enfrentando um Duende do Natal!\n");
+    } else {
+        printf("Inimigo invalido!\n");
+        return;
     }
-    else if (enemy == 2) {
-        enemyLife = 666;
-        system("cls");
-        while (enemyLife > 0) {
-            printf("\nVoce ataca o dragao!\n");
-            if (arma == 1) armaDamage = rand() % 11 + dmgUp;
-            else if (arma == 2) armaDamage = rand() % 9 + dmgUp;
-            else if (arma == 3) armaDamage = rand() % 13 + dmgUp;
-            else armaDamage = 0;
 
-            printf("Seu dano foi de %d\n", armaDamage);
-            enemyLife -= armaDamage;
-            printf("O inimigo agora tem %d de vida\n", enemyLife);
-        }
-        printf("\nParabens!!! Voce derrotou o Dragao!\n");
-        gold = gold + rand() % 351;
-        printf("Voce ganhou %d de ouro!\n", gold);
-        printf("Agora voce tem %d gold.", gold);
-        system("pause");
+    while (enemyLife > 0) {
+        int armaDamage = 0;
+
+        if (arma == 1) armaDamage = rolarDado(8) + dmgUp;
+        else if (arma == 2) armaDamage = rolarDado(10) + dmgUp;
+        else if (arma == 3) armaDamage = rolarDado(12) + dmgUp;
+
+        printf("Voce causou %d de dano!\n", armaDamage);
+        enemyLife -= armaDamage;
+        printf("O inimigo tem %d de vida.\n", enemyLife);
     }
+
+    printf("Parabens! Voce derrotou o adversario!\n");
+    int ganho = (enemy == 1) ? rand() % 4 : (enemy == 2) ? rand() % 6 : rand() % 8;
+    gold += ganho;
+    printf("Voce ganhou %d de ouro! Agora tem %d gold.\n", ganho, gold);
 }
 
-//----------------------------- Mago ---------------------------------------------------------------------
-
-void mago() {
-    printf("\nVoce e um Mago, qual arma vai usar?\n");
-    printf("1- Magia de Gelo (D10)\n");
-    printf("2- Magia de Fogo (D8)\n");
-    printf("3- Magia de Raio (D12)\n");
-    scanf("%d", &arma);
-
-    printf("\nEscolha seu adversario:\n");
-    printf("1- Rato\n");
-    printf("2- Dragao\n");
-    scanf("%d", &enemy);
-
-    if (enemy == 1) {
-        enemyLife = 35;
-        system("cls");
-        while (enemyLife > 0) {
-            printf("\nVoce ataca o rato!\n");
-            if (arma == 1) armaDamage = rand() % 11;
-            else if (arma == 2) armaDamage = rand() % 9;
-            else if (arma == 3) armaDamage = rand() % 13;
-            else armaDamage = 0;
-
-            printf("Seu dano foi de %d\n", armaDamage);
-            enemyLife -= armaDamage;
-            printf("O inimigo agora tem %d de vida\n", enemyLife);
-        }
-        printf("\nParabens!!! Voce derrotou o Rato!\n");
-        gold = gold + rand() % 6;
-        printf("Voce ganhou %d de ouro!\n", gold);
-        printf("Agora voce tem %d gold.", gold);
-        system("pause");
-    }
-    else if (enemy == 2) {
-        enemyLife = 666;
-        system("cls");
-        while (enemyLife > 0) {
-            printf("\nVoce ataca o dragao!\n");
-            if (arma == 1) armaDamage = rand() % 11;
-            else if (arma == 2) armaDamage = rand() % 9;
-            else if (arma == 3) armaDamage = rand() % 13;
-            else armaDamage = 0;
-
-            printf("Seu dano foi de %d\n", armaDamage);
-            enemyLife -= armaDamage;
-            printf("O inimigo agora tem %d de vida\n", enemyLife);
-        }
-        printf("\nParabens!!! Voce derrotou o Drageo!\n");
-        gold = gold + rand() % 351;
-        printf("Voce ganhou %d de ouro!\n", gold);
-        printf("Agora voce tem %d gold.", gold);
-        system("pause");
-    }
-}
-
-//----------------------------- Arqueiro ---------------------------------------------------------------------
-void arqueiro() {
-
-                printf("\nVoce e um Arqueiro, qual arma vai usar?\n");
-                printf("1- Besta (D12)\n");
-                printf("2- Arco Simples (D8)\n");
-                printf("3- Arco Composto (D12)\n");
-                scanf("%d", &arma);
-
-                printf("\nEscolha seu adversario:\n");
-                printf("1- Rato\n");
-                printf("2- Dragao\n");
-                scanf("%d", &enemy);
-
-                if (enemy == 1) {
-                    enemyLife = 35;
-                    system("cls");
-                    while (enemyLife > 0) {
-                        printf("\nVoce ataca o rato!\n");
-                        if (arma == 1) armaDamage = rand() % 11;
-                        else if (arma == 2) armaDamage = rand() % 9;
-                        else if (arma == 3) armaDamage = rand() % 13;
-                        else armaDamage = 0;
-
-                        printf("Seu dano foi de %d\n", armaDamage);
-                        enemyLife -= armaDamage;
-                        printf("O inimigo agora tem %d de vida\n", enemyLife);
-                    }
-                    printf("\nParabens!!! Voce derrotou o Rato!\n");
-                    gold = gold + rand() % 6;
-                    printf("Voce ganhou %d de ouro!\n", gold);
-                    printf("Agora voce tem %d gold.", gold);
-                    system("pause");
-                }
-                else if (enemy == 2) {
-                    enemyLife = 666;
-                    system("cls");
-                    while (enemyLife > 0) {
-                        printf("\nVoce ataca o dragao!\n");
-                        if (arma == 1) armaDamage = rand() % 11;
-                        else if (arma == 2) armaDamage = rand() % 9;
-                        else if (arma == 3) armaDamage = rand() % 13;
-                        else armaDamage = 0;
-
-                        printf("Seu dano foi de %d\n", armaDamage);
-                        enemyLife -= armaDamage;
-                        printf("O inimigo agora tem %d de vida\n", enemyLife);
-                    }
-                    printf("\nParabens!!! Voce derrotou o Drageo!\n");
-                    gold = gold + rand() % 351;
-                    printf("Voce ganhou %d de ouro!\n", gold);
-                    printf("Agora voce tem %d gold.", gold);
-                    system("pause");
-                }
-
-}
-
-
-
-void loja() {
+void lojaCidade() {
     system("cls");
-    printf("Bem vindo a Loja:\n");
-    printf("Voce tem %d gold para gastar.\n", gold);
-    printf("Voce gostaria de comprar o que?\n");
-    printf("1- Upgrade de dano 1. Custo 15 gold.\n");
+    printf("Bem-vindo a Loja de Natal!\n");
+    printf("Voce tem %d gold.\n", gold);
+    printf("1- Upgrade de dano (+2) - 15 gold\n");
+    printf("2- Upgrade de dano (+10) - 75 gold\n");
     scanf("%d", &loja);
-    if (loja == 1 && gold >=15) {
+
+    if (loja == 1 && gold >= 15) {
         dmgUp += 2;
         gold -= 15;
-        printf("Seu bonus de dano foi aumentado em 2 (total:%d)\n", dmgUp);
-        printf("Seu gold foi reduzido em 15 (gold total: %d\n", gold);
-        system("pause");
+        printf("Seu bonus de dano aumentou em 2 (total: %d)\n", dmgUp);
+        printf("Seu gold foi reduzido em 15 (total: %d)\n", gold);
+    }else if (loja == 2 && gold >= 75) {
+        dmgUp += 10;
+        gold -= 75;
+        printf("Seu bonus de dano aumentou em 5 (total: %d)\n", dmgUp);
+        printf("Seu gold foi reduzido em 75 (total: %d)\n");
     }else {
-        printf("Gold insuficiente");
-        system("pause");
+        printf("Gold insuficiente!\n");
     }
-
+    system("pause");
 }

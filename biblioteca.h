@@ -1,9 +1,8 @@
 #ifndef BIBLIOTECA_H
 #define BIBLIOTECA_H
 
-void guerreiro();
-void mago();
-void arqueiro();
-void loja();
+int rolarDado(int lados);
+void combate(int enemy);
+void lojaCidade(void);
 
-#endif
+#endif // BIBLIOTECA_H
